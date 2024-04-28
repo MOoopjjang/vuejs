@@ -2,49 +2,44 @@
     <Subpage v-bind:pagetit="'도서 소개'">
         <div class="bookpage">
             <VueSlickCarousel class="subpageslider" v-bind="settings">
-                <div class="rollimg" v-for="(item,index) in Newbooks" v-bind:key="index">
+                <div class="rollimg" v-bind:class="{active: index === tabIndex}" v-for="(item,index) in Newbooks" 
+                v-bind:key="index" 
+                @init="handleInit"
+                ref="carousel"
+                v-on:click="Clicklink(index)">
                     <span class="imgbox"><img v-bind:src="item.imgurl" /></span>
                     <strong v-html="item.name"></strong>
                 </div>
             </VueSlickCarousel>
-            <section class="bookdetail">
-                <h1 class="booktitle">
-                    DO it! 웹 사이트 만들기
-                    <span>HTML , CSS , 자바스크립트 , JQuery , Ajax로 웹 퍼블리싱</span>
-                </h1>
-                <div class="book-info">
-                    <div class="imgview">
-                        <div class="imgbook">
-                            <img src="/images/books_image/book01.jpg" alt="" />
-                        </div>
-                        <div class="bookbtns">
-                            <b-button variant="lightgray">
-                                <i class="bi bi-search" />책 미리보기
-                            </b-button>
-                            <b-button variant="lightgray">
-                                <i class="bi bi-hdd" />전자책
-                            </b-button>
-                        </div>
-                    </div>
-                    <div class="infolist">
-                        <ul>
-                            <li v-for="(item , index) in bookinfolists" v-bind:key="index">
-                                <span class="label" v-html="item.label"></span>
-                                <span class="label" v-html="item.content"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+            <component
+              v-bind:is="componentslist[tabIndex]"
+              v-bind:bookUrl="Newbooks[tabIndex].imgurl"
+              v-bind:bookName="Newbooks[tabIndex].name"
+              v-bind:bookDec="Newbooks[tabIndex].dec"            
+            >
+            </component>
         </div>
     </Subpage>
 </template>
 
 <script>
 import Subpage from "@/layout/components/Subpage.vue";
+import BookDetail1 from "./BookDetail1.vue";
+import BookDetail2 from "./BookDetail2.vue";
+
+
 export default {
     components: {
         Subpage,
+        BookDetail1,
+        BookDetail2,
+    },
+    mounted() {
+        if(!this.$route.query.tabId){
+            this.tabIndex = 0;
+        }else{
+            this.tabIndex = Number(this.$route.query.tabId);
+        }
     },
     data(){
         return{
@@ -110,7 +105,26 @@ export default {
                     label:"상태",
                     content: "정상 판매중"
                 }
-            ]
+            ],
+            tapselect: "introduce",
+            componentslist:[
+                BookDetail1,
+                BookDetail2
+            ],
+            tabIndex: 0,
+        }
+    },
+    methods: {
+        Clicklink(tabIndex) {
+            if (!(this.$route.query.tabId == tabIndex)){
+                this.tabIndex = tabIndex;
+                return this.$router.push("/book?tabId="+tabIndex);
+            }
+        },
+        handleInit(){
+            this.$nextTick(()=>{
+                this.$refs.carousel.goTo(this.tabIndex);
+            })
         }
     }
 }
