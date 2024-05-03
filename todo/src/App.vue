@@ -34,8 +34,24 @@ export default {
   methods:{
     addTodo(todoItem){
       console.log(todoItem);
-      localStorage.setItem(todoItem,todoItem);
-      this.todoItems.push(todoItem);
+      this.$axios.post('http://localhost:8877/todo/regist' , {
+        Title:todoItem
+      })
+      .then((res)=>{
+        console.dir(res);
+        alert(res);
+        this.todoItems.push(todoItem);
+      })
+      .catch((err)=>{
+        alert(err);
+      })
+      .finally(()=>{
+        console.log("end");
+      });
+
+
+      // localStorage.setItem(todoItem,todoItem);
+      // this.todoItems.push(todoItem);
     }
     ,removeAllTodo(){
       console.log('removeAllTodo');
@@ -56,13 +72,30 @@ export default {
     'TodoMenu':TodoMenu
   }
   ,created(){
-    console.log('localStorage length : ',localStorage.length)
-    if(localStorage.length > 0){
-        for(var i = 0;i < localStorage.length ; i++){
-          console.log('localStorage key : ',localStorage.key(i));
-          this.todoItems.push(localStorage.key(i));
-        }
-    }
+    // console.log('localStorage length : ',localStorage.length)
+    // if(localStorage.length > 0){
+    //     for(var i = 0;i < localStorage.length ; i++){
+    //       console.log('localStorage key : ',localStorage.key(i));
+    //       this.todoItems.push(localStorage.key(i));
+    //     }
+    // }
+
+    this.$axios.get("http://localhost:8877/todo")
+        .then((res)=>{
+            console.log("totalCount = "+res.data.totalCount);
+            if(res.data.totalCount > 0){
+              res.data.list.forEach(d=>{
+                this.todoItems.push(d.title);
+              })
+            }
+
+        })
+        .catch((error)=>{
+          alert(error);
+        })
+        .finally(()=>{
+          console.log("end")
+        })
   }
 }
 </script>
