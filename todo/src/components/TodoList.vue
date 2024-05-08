@@ -4,7 +4,7 @@
         <transition-group name="list" tag="ul">
             <li v-for="(todoItem,index) in propsdata" v-bind:key="todoItem" class="shadow">
                 <i class="checkBtn fas fa-check" aria-hidden="true"></i>
-                {{ todoItem }}
+                {{ todoItem.Title }}
                 <span class="removeBtn" type="button" @click="removeTodo(todoItem,index)">
                     <i class="far fa-trash-alt" aria-hidden="true"></i>
                 </span>
@@ -24,7 +24,7 @@
         // },
         ,methods:{
             removeTodo(item,index){
-                console.log('item : '+item+', index:'+index)
+                console.dir(item)
                 this.$emit('removeTodo' , item , index);
             },
 

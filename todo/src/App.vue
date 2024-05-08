@@ -40,7 +40,7 @@ export default {
       .then((res)=>{
         console.dir(res);
         alert(res);
-        this.todoItems.push(todoItem);
+        this.todoItems.push(res.data);
       })
       .catch((err)=>{
         alert(err);
@@ -49,19 +49,55 @@ export default {
         console.log("end");
       });
 
-
-      // localStorage.setItem(todoItem,todoItem);
-      // this.todoItems.push(todoItem);
+/*
+      localStorage.setItem(todoItem,todoItem);
+      this.todoItems.push(todoItem);
+*/
     }
     ,removeAllTodo(){
+      /*
       console.log('removeAllTodo');
       localStorage.clear();
-      this.todoItems = [];
+      */
+
+      this.$axios.delete('http://localhost:8877/todo/rm/all')
+      .then((res)=>{
+        console.dir(res)
+        this.todoItems = [];
+      })
+      .cache((err)=>{
+        alert(err)
+      })
+      .finally(()=>{
+        console.log("end")
+      })
+      
     }
     ,removeTodo(todoItem , index){
-      console.log(">>>vue -> removeTodo")
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index , 1);
+      alert(todoItem.Idx)
+      this.$axios.delete('http://localhost:8877/todo/rm',{
+        data: {
+          Idx:todoItem.Idx,
+          Title:todoItem.Title
+        }
+        
+      })
+      .then((res)=>{
+          alert(res);
+          this.todoItems.splice(index , 1);
+      })
+      .catch((err)=>{
+        alert(err)
+      })
+      .finally(()=>{
+        console.log("end")
+      })
+
+      /*
+       console.dir(">>>vue -> removeTodo")
+       localStorage.removeItem(todoItem);
+       this.todoItems.splice(index , 1);
+      */
     }
   },
   components: {
@@ -72,20 +108,23 @@ export default {
     'TodoMenu':TodoMenu
   }
   ,created(){
-    // console.log('localStorage length : ',localStorage.length)
-    // if(localStorage.length > 0){
-    //     for(var i = 0;i < localStorage.length ; i++){
-    //       console.log('localStorage key : ',localStorage.key(i));
-    //       this.todoItems.push(localStorage.key(i));
-    //     }
-    // }
+    /*
+    console.log('localStorage length : ',localStorage.length)
+    if(localStorage.length > 0){
+        for(var i = 0;i < localStorage.length ; i++){
+          console.log('localStorage key : ',localStorage.key(i));
+          this.todoItems.push(localStorage.key(i));
+        }
+    }
+    */
 
     this.$axios.get("http://localhost:8877/todo")
         .then((res)=>{
-            console.log("totalCount = "+res.data.totalCount);
-            if(res.data.totalCount > 0){
-              res.data.list.forEach(d=>{
-                this.todoItems.push(d.title);
+             console.dir(res);
+            console.log("totalCount = "+res.data.TotalCount);
+            if(res.data.TotalCount > 0){
+              res.data.List.forEach(d=>{
+                this.todoItems.push(d);
               })
             }
 
@@ -119,6 +158,6 @@ export default {
 
     .mainWrap{
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
     }
 </style>

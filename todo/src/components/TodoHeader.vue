@@ -1,11 +1,24 @@
 <template>
     <header>
-        <h1>TODO it!</h1>
+        <h1>{{ title }}</h1>
     </header>
 </template>
 
 <script>
     export default{
+        data(){
+            return {
+                title:"Just Do it"
+            }
+        }
+        ,created(){
+            this.$eventBus.$on('chgTit',this.changeTitle)
+        }
+        ,methods:{
+            changeTitle(nTitle){
+                this.title = nTitle
+            }
+        }
 
     }
 </script>
