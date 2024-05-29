@@ -6,8 +6,9 @@
       </div>
       <div>
         <TodoHeader></TodoHeader>
-        <TodoInput v-on:addTodo="addTodo"></TodoInput>
-        <TodoList v-bind:propsdata="todoItems" v-on:removeTodo="removeTodo"></TodoList>
+        <!-- <TodoInput v-on:addTodo="addTodo"></TodoInput> -->
+        <!-- <TodoList v-bind:propsdata="todoItems" v-on:removeTodo="removeTodo" v-on:addTodo="addTodo"></TodoList> -->
+        <router-view />
         <TodoFooter v-on:removeAllTodo="removeAllTodo"></TodoFooter>
       </div>
     </div>
@@ -17,13 +18,16 @@
   </div>
 </template>
 
+<!-- <script src="https://unpkg.com/vue-router@3/dist/vue-router.js"></script> -->
 <script>
 import TodoHeader from './components/TodoHeader.vue'
-import TodoInput from './components/TodoInput.vue'
-import TodoList from './components/TodoList.vue'
+// import TodoInput from './components/TodoInput.vue'
+// import TodoList from './components/TodoList.vue'
 import TodoFooter from './components/TodoFooter.vue'
 import TodoMenu from './components/TodoMenu.vue'
 // import AlertModal from '.components/common/AlertModal.vue'
+
+
 
 export default {
   data(){
@@ -32,29 +36,26 @@ export default {
     }
   },
   methods:{
-    addTodo(todoItem){
-      console.log(todoItem);
-      this.$axios.post('http://localhost:8877/todo/regist' , {
-        Title:todoItem
-      })
-      .then((res)=>{
-        console.dir(res);
-        alert(res);
-        this.todoItems.push(res.data);
-      })
-      .catch((err)=>{
-        alert(err);
-      })
-      .finally(()=>{
-        console.log("end");
-      });
+    // addTodo(todoItem){
+    //   console.log(todoItem);
+    //   this.$axios.post('http://localhost:8877/todo/regist' , {
+    //     Title:todoItem
+    //   })
+    //   .then((res)=>{
+    //     console.dir(res);
+    //     alert(res);
+    //     this.todoItems.push(res.data);
+    //   })
+    //   .catch((err)=>{
+    //     alert(err);
+    //   })
+    //   .finally(()=>{
+    //     console.log("end");
+    //   });
 
-/*
-      localStorage.setItem(todoItem,todoItem);
-      this.todoItems.push(todoItem);
-*/
-    }
-    ,removeAllTodo(){
+
+    // },
+    removeAllTodo(){
       /*
       console.log('removeAllTodo');
       localStorage.clear();
@@ -102,8 +103,8 @@ export default {
   },
   components: {
     'TodoHeader':TodoHeader,
-    'TodoInput':TodoInput,
-    'TodoList':TodoList,
+    // 'TodoInput':TodoInput,
+    // 'TodoList':TodoList,
     'TodoFooter':TodoFooter,
     'TodoMenu':TodoMenu
   }

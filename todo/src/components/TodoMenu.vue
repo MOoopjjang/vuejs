@@ -1,25 +1,9 @@
 <template>
     <section>
-        <!-- <ul id="menuTab">
-            <li v-for="(item,index) in topMenuList" v-bind:key="index">
-                <button type="button" v-on:click="onChangeTab(item)">{{ item.title }}</button>
-            </li>
-        </ul> -->
-
         <div class="left">
             <ul>
-                <li id="logo">
-                    <div>Inventory</div>
-                    <div>Manager</div>
-                </li>
-                <li>Home</li>
-                <li>Manager</li>
-                <li>State</li>
-                <li>Register</li>
-                <li id="company">
-                    <div>Welcome to Inventory</div>
-                    <div>Seoul Gangnam <br> ... </div>
-                    <div>@copyright demnodey</div>
+               <li v-for="(item , index) in topMenuList" v-bind:key="index">
+                    <router-link v-bind:to="`${item.path}`">{{ item.name }}</router-link>
                 </li>
             </ul>
         </div>
@@ -33,9 +17,9 @@
         data(){
             return {
                 topMenuList:[
-                    {"title":"일정","path":"/todo/a"},
-                    {"title":"완료목록","path":"/todo/b"},
-                    {"title":"오늘할일","path":"/todo/c"}
+                    {"name":"Home","path":"/"},
+                    {"name":"Schedule","path":"/schedule"},
+                    {"name":"Complete","path":"/complete"}
                 ]
             }
         }
@@ -80,7 +64,7 @@
     overflow: hidden
   }
   .left ul {padding: 0 30px}
-  .left ul li { font-size:25px;  height:75px;} 
+  .left ul li { font-size:25px;  height:75px; list-style-type: none;} 
   .left ul li#logo {font-family: 'Passion One', cursive; font-size:50px; height:170px;}
   .left ul li#logo div {line-height: 0.8}
   .left ul li#company {font-size:16px; margin-top:150px; }
