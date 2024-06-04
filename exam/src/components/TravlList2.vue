@@ -21,7 +21,11 @@ export default {
     },
     methods: {
         goCountry(inValue){
-            this.$store.state.selectedCountry = inValue;
+            // 동기적으로 데이타를 조작할경우 ( mutation )
+            //  this.$store.commit('goCountry' , inValue)
+
+            // 비동기적으로 데이타를 조작할 경우 ( action )
+            this.$store.dispatch('goCountry' , inValue)
         }
     },
     filters:{

@@ -25,11 +25,16 @@ export default new Vuex.Store({
                 country:"Nederland",city:"Amsterdam",attraction:"국민미술관",entrance_fee:17.50
             }
         ],
-        selectedCountry:' '
+        selectedCountry:' ',
+        items2:[]
     },
+    // 상태 ( state )에서 데이터를 가져오는 함수
     getters:{
         items: state =>{
             return state.items
+        },
+        items2: state =>{
+            return state.items2
         },
         filteredItems: state => {
             return state.items.filter(item=>{
@@ -37,6 +42,19 @@ export default new Vuex.Store({
             })
         }
     },
-    // mutations: {},
-    // actions: {}
+    mutations: {
+        goCountry(state , inValue){
+            state.selectedCountry = inValue;
+        },
+        saveItems2(state , _data){
+            state.items2.push(_data)
+        }
+    },
+    // 비동기적인 처리가 필요한 작업처리
+    // --> 내부적으로 mutation을 사용
+    actions: {
+        goCountry(context , inValue){
+            context.commit('goCountry' , inValue)
+        }
+    }
 })
