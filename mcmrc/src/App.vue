@@ -5,7 +5,8 @@
           <menu-comp></menu-comp>
        </div>
        <div class="content-wrap">
-          <top-comp></top-comp>
+          <!-- <top-comp></top-comp> -->
+          <router-view name="top"></router-view>
           <router-view></router-view>
           <footer-comp></footer-comp>
        </div>
@@ -15,16 +16,18 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
+
   import MenuComponent from './components/MenuComponent.vue'
-  import TopComponent from './components/TopComponent.vue'
+  // import TopComponent from './components/TopComponent.vue'
   import FooterComponent from './components/FooterComponent.vue'
 
   export default {
-      data(){
-        return {
+      // data(){
+      //   return {
 
-        }
-      },
+      //   }
+      // },
       created(){
           // TODO : axios를 통한 api 연동 필요
           [
@@ -33,14 +36,20 @@
             ,{id:3,itemName:"BananaJuice",itemCd:"ITEM00003",price:5000,qty:34}
             ,{id:4,itemName:"Hot Mile",itemCd:"ITEM00004",price:2000,qty:1000}
           ].forEach(v=>{
-            this.$store.commit("registerProductItem" ,v)
+            // this.$store.commit("registerProductItem" ,v)
+            this.addProductItem(v);
           })
           
       },
       components: {
         'menu-comp':MenuComponent,
-        'top-comp':TopComponent,
+        // 'top-comp':TopComponent,
         'footer-comp':FooterComponent
+      },
+      methods:{
+        ...mapActions([
+          'addProductItem'
+        ])
       }
   }
 </script>

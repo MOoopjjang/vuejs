@@ -2,6 +2,9 @@
    <div class="icon-bar">
         <router-link to="/"><i class="fa fa-home">home</i></router-link>
         <router-link to="/signin"><i class="fas fa-question">로그인</i></router-link>
+        <router-link to="/content"><i class="fas fa-question">상품</i></router-link>
+        <router-link to="/view/cart"><i class="fas fa-question">장바구니</i></router-link>
+        <router-link to="/view/order"><i class="fas fa-question">주문목록</i></router-link>
    </div>
 </template>
 <script>

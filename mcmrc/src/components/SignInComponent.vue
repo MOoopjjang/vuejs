@@ -1,24 +1,43 @@
 <template>
     <div class="signin-wrap">
-        <v-layout justify-center>
-	        <v-card class="rounded-card mb-3">
-	            <v-card class="rounded-card mb-3">
-	                <v-card-title class="justify-center">
-	                    <div><h3 class="headline mb-2">로그인</h3></div>
-	                </v-card-title>
-	                <v-form v-model="valid" ref="form">
-	                    <v-text-field id="username" name="username" class="pa-2" label="아이디" v-model="username" :rules="usernameRules" required></v-text-field>
-	                    <v-text-field id="password" name="password" type="password" class="pa-2" label="비밀번호" v-model="password" :rules="passwordRules" required></v-text-field>
-	                    <v-checkbox class="pl-2" label="진행할까요?" v-model="checkbox" :rules="checkboxRules" required></v-checkbox>
-	                    <v-btn v-on:click="signin" :class="{ red: !valid,green: valid}">전송</v-btn>
-	                    <v-btn v-on:click="clear">취소</v-btn>
-	                </v-form>
-	            </v-card>
-	        </v-card>
-	    </v-layout>
+        <b-form >
+
+        <b-form-group id="input-group-1" label="Your Name:" label-for="input-1">
+            <b-form-input
+            id="username"
+            v-model="username"
+            placeholder="Enter name"
+            required
+            ></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="input-group-2" label="Your password" label-for="input-2">
+            <b-form-input
+            id="password"
+            v-model="password"
+            placeholder="Enter password"
+            required
+            ></b-form-input>
+        </b-form-group>
+<!-- 
+        <b-form-group id="input-group-4" v-slot="{ ariaDescribedby }">
+            <b-form-checkbox-group
+            v-model="form.checked"
+            id="checkboxes-4"
+            :aria-describedby="ariaDescribedby"
+            >
+            <b-form-checkbox value="me">Check me out</b-form-checkbox>
+            <b-form-checkbox value="that">Check that out</b-form-checkbox>
+            </b-form-checkbox-group>
+        </b-form-group> -->
+
+        <b-button type="button" class="outline-primary" variant="outline-primary" v-on:click="signin">로그인</b-button>
+        </b-form>
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
+
     export default {
         data(){
             return {
@@ -38,14 +57,12 @@
         },
         methods:{
             signin(){
-               if(this.$refs.form.validate() == true){
-                alert('전송 데이터\n\n'+this.username);
+               alert('로그인되었습니다.');
+               // static access token 발급
+               this.setAccessToken('Bearer aaaabbbvkak84kdj'); 
                 this.$router.push({name:'content'})
-               }
             },
-            clear(){
-                this.$refs.form.reset();
-            }
+            ...mapActions(['setAccessToken'])
         }
 
     }

@@ -2,40 +2,50 @@
     <div>
         <div>
             <ul>
-                <li v-for="item in items" v-bind:key="item.itemCd" v-on:click="goItemDetail(item)">
-                  <div>{{ item.id }}</div>
-                  <div>{{ item.itemName }}</div>
-                  <div>{{ item.price }}</div>
-                </li>
+                <product-item-component v-for="productItem in productItems" v-bind:key="productItem.itemCd" 
+                    v-on:detail="goItemDetail(productItem)"
+                    v-bind:productItem="productItem" 
+                />
             </ul>
         </div>
 
     </div>
 </template>
 <script>
+    import ProductItemComponent from './ProductItemComponent.vue'
+    import { mapActions , mapState } from 'vuex';
+
     export default {
         methods:{
             goItemDetail(item){
-                console.log(">>>> goItemDetail()-> "+item.id)
-                this.$store.commit('selectItem' , item.id)
-                this.$router.push({name:'itemDetail'})
-            }
+                this.setSelectItem(item.id);
+                this.$router.push({name:'itemDetail'});
+                
+            },
+            ...mapActions([
+                'getProductItem',
+                'setSelectItem'
+            ])
         },
         computed:{
-            items(){
-                return this.$store.getters.productItems
-            }
+            // 값을 mapState를 통해 컴포넌트에 매핑한다.
+            ...mapState([
+                'productItems'
+            ])
+        },
+        components:{
+            'product-item-component':ProductItemComponent
         }
     }
 </script>
 <style scoped>
-li{
+/* li{
     display: flex;
     align-items: center;
     justify-content: center;
 
     list-style-type: none;
-}
+} */
 
 li div:nth-child(1){
     flex-grow: 1;

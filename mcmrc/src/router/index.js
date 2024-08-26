@@ -1,12 +1,13 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeComponent from '../components/HomeComponent.vue'
-import SignInComponent from '../components/SignInComponent.vue'
-import ContentComponent from '../components/ContentComponent.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import HomeComponent from '../components/HomeComponent.vue';
+import SignInComponent from '../components/SignInComponent.vue';
+import ContentComponent from '../components/ContentComponent.vue';
+import TopComponent from '../components/TopComponent.vue';
 
 import ItemDetailView from '../views/ItemDetailView.vue'
-
-
+import CartView from '../views/CartView.vue'
+import OrderView from '../views/OrderView.vue';
 
 
 Vue.use(VueRouter)
@@ -20,7 +21,10 @@ const routes = [
   {
     path: '/content',
     name: 'content',
-    component: ContentComponent
+    components: {
+      top:TopComponent,
+      default:ContentComponent
+    }
   },
   {
     path: '/signin',
@@ -30,7 +34,26 @@ const routes = [
   {
     path: '/item/detail',
     name: 'itemDetail',
-    component: ItemDetailView
+    components: {
+      top:TopComponent,
+      default:ItemDetailView
+    }
+  },
+  {
+    path: '/view/cart',
+    name: 'cart',
+    components: {
+      top:TopComponent,
+      default:CartView
+    }
+  },
+  {
+    path: '/view/order',
+    name: 'order',
+    components: {
+      top:TopComponent,
+      default:OrderView
+    }
   }
 ]
 
