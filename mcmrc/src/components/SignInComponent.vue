@@ -60,6 +60,10 @@ import { mapActions } from 'vuex';
                alert('로그인되었습니다.');
                // static access token 발급
                this.setAccessToken('Bearer aaaabbbvkak84kdj'); 
+               // cookie 설정
+               this.$cookies.set('accessToken' , 'Bearer aaaabbbvkak84kdj')
+
+
                 this.$router.push({name:'content'})
             },
             ...mapActions(['setAccessToken'])

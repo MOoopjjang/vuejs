@@ -5,7 +5,6 @@
           <menu-comp></menu-comp>
        </div>
        <div class="content-wrap">
-          <!-- <top-comp></top-comp> -->
           <router-view name="top"></router-view>
           <router-view></router-view>
           <footer-comp></footer-comp>
@@ -19,15 +18,9 @@
   import { mapActions } from 'vuex';
 
   import MenuComponent from './components/MenuComponent.vue'
-  // import TopComponent from './components/TopComponent.vue'
   import FooterComponent from './components/FooterComponent.vue'
 
   export default {
-      // data(){
-      //   return {
-
-      //   }
-      // },
       created(){
           // TODO : axios를 통한 api 연동 필요
           [
@@ -43,7 +36,6 @@
       },
       components: {
         'menu-comp':MenuComponent,
-        // 'top-comp':TopComponent,
         'footer-comp':FooterComponent
       },
       methods:{
