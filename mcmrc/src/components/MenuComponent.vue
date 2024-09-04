@@ -20,8 +20,9 @@
 </script>
 <style scoped>
 .icon-bar{
+    width: 18%;
     height: 100%;
-    flex-grow:1;
+    /* flex-grow:1; */
     background-color: #555;
     position: fixed;
     top: 0;

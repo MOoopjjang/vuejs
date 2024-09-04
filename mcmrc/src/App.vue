@@ -75,7 +75,8 @@
 }
 
 .side-wrap{
-  flex-grow:1;
+  /* flex-grow:1; */
+  width:18%;
 }
 
 .content-wrap{
@@ -83,7 +84,9 @@
   align-items: center;
   justify-content: center;
 
-  flex-grow:1; 
+  width:82%;
+
+  /* flex-grow:2;  */
 }
 
 .content-wrap div {
