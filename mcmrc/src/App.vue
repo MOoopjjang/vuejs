@@ -5,9 +5,14 @@
           <menu-comp></menu-comp>
        </div>
        <div class="content-wrap">
-          <router-view name="top"></router-view>
-          <router-view></router-view>
+        <div>
+          <router-view name="top" v-bind:stageInfo="stageInfo"></router-view>
+          <div class="body-wrap">
+            <router-view></router-view>
+          </div>
+          <!-- <router-view class="body-wrap"></router-view> -->
           <footer-comp></footer-comp>
+        </div>
        </div>
     </div>
       
@@ -21,6 +26,11 @@
   import FooterComponent from './components/FooterComponent.vue'
 
   export default {
+      data(){
+        return {
+          stageInfo: {}
+        }
+      },
       created(){
           // TODO : axios를 통한 api 연동 필요
           [
@@ -31,6 +41,9 @@
           ].forEach(v=>{
             // this.$store.commit("registerProductItem" ,v)
             this.addProductItem(v);
+
+            this.stageInfo.currentProfile = process.env.VUE_APP_PROFILE;
+            this.stageInfo.version = process.env.VUE_APP_VERSION;
           })
           
       },
@@ -66,10 +79,26 @@
 }
 
 .content-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   flex-grow:1; 
 }
 
-nav {
+.content-wrap div {
+  width: 100%;
+  height: 100%;
+
+  margin: 0 auto;
+}
+
+.body-wrap {
+  /* height: 400px; */
+  overflow: auto;
+} 
+
+/* nav {
   padding: 30px;
 }
 
@@ -80,5 +109,5 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>

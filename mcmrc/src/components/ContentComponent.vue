@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="content-main">
         <div>
-            <ul>
+            <ul class="content-list">
                 <product-item-component v-for="productItem in productItems" v-bind:key="productItem.itemCd" 
                     v-on:detail="goItemDetail(productItem)"
                     v-bind:productItem="productItem" 
@@ -14,8 +14,12 @@
 <script>
     import ProductItemComponent from './ProductItemComponent.vue'
     import { mapActions , mapState } from 'vuex';
+    import EventBus from '@/assets/js/event-bus.js';
 
     export default {
+        created(){
+            EventBus.$emit('currentTab' , '상품목록');
+        },
         methods:{
             goItemDetail(item){
                 this.setSelectItem(item.id);
@@ -39,13 +43,14 @@
     }
 </script>
 <style scoped>
-/* li{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.content-main{
+    width: 100%;
+    height: 400px;
+}
 
-    list-style-type: none;
-} */
+.content-list {
+    width: 100%;
+}
 
 li div:nth-child(1){
     flex-grow: 1;

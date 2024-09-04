@@ -1,6 +1,8 @@
 <template>
-    <div>
-        <h2>[{{profile}}]Top Area</h2>
+    <div class="top-main">
+        <div class="top-main-1">
+            <h2>MCMRC {{ stageInfo.currentProfile }}_{{ stageInfo.version }} > </h2><span>{{ currentTab }}</span>
+        </div>
         <div v-if="accessToken">
             <button v-on:click="logout">로그아웃</button>
         </div>
@@ -10,13 +12,26 @@
     </div>
 </template>
 <script>
+
 import { mapState , mapActions } from 'vuex';
+import EventBus from '@/assets/js/event-bus.js';
 
 export default {
+    name:'TopComponent',
+    props:{
+        stageInfo:{
+            type:Object
+        }
+    },
     data(){
         return {
-            profile:''
+            currentTab:''
         }
+    },
+    created(){
+        EventBus.$on('currentTab' , (tab)=>{
+            this.currentTab = tab;
+        });
     },
     methods:{
         logout(){
@@ -26,11 +41,10 @@ export default {
             // cookie에서 token 삭제.
             this.$cookies.remove('accessToken');
         },
+        curTab(){
+
+        },
         ...mapActions(['clearAccessToken'])
-    },
-    created(){
-        this.profile = process.env.CURRENT_PROFILE;
-        // alert(this.profile);
     },
     computed:{
         ...mapState(['accessToken'])
@@ -39,4 +53,17 @@ export default {
 }
 </script>
 <style scoped>
+.top-main{
+    padding: 10px;
+    background-color: cadetblue;
+}
+.top-main-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-main-1 > span {
+    margin-left:10px;
+}
 </style>

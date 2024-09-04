@@ -8,6 +8,7 @@ import TopComponent from '../components/TopComponent.vue';
 import ItemDetailView from '../views/ItemDetailView.vue'
 import CartView from '../views/CartView.vue'
 import OrderView from '../views/OrderView.vue';
+import AppInfo from '../views/AppInfo.vue';
 
 
 Vue.use(VueRouter)
@@ -24,7 +25,10 @@ const routes = [
     components: {
       top:TopComponent,
       default:ContentComponent
-    }
+    },
+    // props: {
+    //   currentTab:'상품목록'
+    // }
   },
   {
     path: '/signin',
@@ -37,7 +41,10 @@ const routes = [
     components: {
       top:TopComponent,
       default:ItemDetailView
-    }
+    },
+    // props: {
+    //   currentTab:'상품목록상세'
+    // }
   },
   {
     path: '/view/cart',
@@ -45,7 +52,8 @@ const routes = [
     components: {
       top:TopComponent,
       default:CartView
-    }
+    },
+    // props: true
   },
   {
     path: '/view/order',
@@ -53,7 +61,17 @@ const routes = [
     components: {
       top:TopComponent,
       default:OrderView
-    }
+    },
+    // props: true
+  },
+  {
+    path: '/info',
+    name: 'info',
+    components: {
+      top:TopComponent,
+      default: AppInfo
+    },
+    // props: true
   }
 ]
 

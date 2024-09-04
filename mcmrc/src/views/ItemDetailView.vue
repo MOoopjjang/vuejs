@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="item-detail">
         <h1>Item Detail</h1>
         <form>
             
@@ -12,6 +12,7 @@
     </div>
 </template>
 <script>
+    import EventBus from '@/assets/js/event-bus.js';
     import { mapGetters , mapActions } from 'vuex';
 
     export default {
@@ -27,6 +28,8 @@
             this.sItem = this.getSelectItem;
             console.dir(this.sItem);
 
+            // Header 갱신
+            EventBus.$emit('currentTab' , '상품상세');
         },
         methods:{
             saveCart(){
@@ -43,4 +46,8 @@
     }
 </script>
 <style scoped>
+.item-detail{
+    width: 100%;
+    height: 400px;
+}
 </style>

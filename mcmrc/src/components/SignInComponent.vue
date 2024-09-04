@@ -74,6 +74,6 @@ import { mapActions } from 'vuex';
 <style scoped>
 .signin-wrap{
     width: 100%;
-    height: 600px;
+    height: 400px;
 }
 </style>

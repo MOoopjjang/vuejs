@@ -5,6 +5,7 @@
         <router-link to="/content"><i class="fas fa-question">상품</i></router-link>
         <router-link to="/view/cart"><i class="fas fa-question">장바구니</i></router-link>
         <router-link to="/view/order"><i class="fas fa-question">주문목록</i></router-link>
+        <router-link to="/info"><i class="fas fa-question">앱정보</i></router-link>
    </div>
 </template>
 <script>
