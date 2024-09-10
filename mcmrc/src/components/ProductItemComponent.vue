@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <!-- <div> -->
         <li class="product-item" v-on:click="goDetail">
             <strong>{{ productItem.itemName }}</strong>
             <span>ID : {{ productItem.id }}</span>
             <span>CD : {{ productItem.itemCd }}</span>
             <span>가격 : {{ productItem.price }}</span>
         </li>
-    </div>
+    <!-- </div> -->
 </template>
 <script>
     export default {
@@ -30,7 +30,8 @@
         justify-content: center;
 
         list-style-type: none;
-        border: 2px groove;
+        border-bottom: 2px groove; 
+        /* box-shadow: inset; */
         padding-left: 10px;
     }
 </style>

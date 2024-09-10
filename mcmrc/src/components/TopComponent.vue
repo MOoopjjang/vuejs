@@ -14,7 +14,7 @@
 <script>
 
 import { mapState , mapActions } from 'vuex';
-import EventBus from '@/assets/js/event-bus.js';
+// import EventBus from '@/assets/js/event-bus.js';
 
 export default {
     name:'TopComponent',
@@ -29,7 +29,7 @@ export default {
         }
     },
     created(){
-        EventBus.$on('currentTab' , (tab)=>{
+        this.$eventBus.$on('currentTab' , (tab)=>{
             this.currentTab = tab;
         });
     },

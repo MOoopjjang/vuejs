@@ -12,7 +12,8 @@ import { ACCESS_TOKEN } from './assets/js/defines.js'
 Vue.use(vueCookies);
 Vue.use(bootstrapVue);
 // Vue.use('Vuex');
-Vue.$axios = axios;
+Vue.prototype.$axios = axios;
+Vue.prototype.$eventBus = new Vue();
 
 // 쿠키 만료시간 설정 ( 1 day )
 Vue.$cookies.config('1d');

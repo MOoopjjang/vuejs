@@ -20,7 +20,7 @@
     </div>
 </template>
 <script>
-    import EventBus from '@/assets/js/event-bus.js';
+    // import EventBus from '@/assets/js/event-bus.js';
     import ProductItemComponent from '../components/ProductItemComponent.vue'
     import { mapGetters , mapActions } from 'vuex';
 
@@ -36,7 +36,7 @@
             this.isShow = this.cartItems.length > 0;
 
             // Header 갱신
-            EventBus.$emit('currentTab' , '장바구니');
+            this.$eventBus.$emit('currentTab' , '장바구니');
         },
         computed:{
             getTotalPrice(){

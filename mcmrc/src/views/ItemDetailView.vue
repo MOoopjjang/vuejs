@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-    import EventBus from '@/assets/js/event-bus.js';
+    // import EventBus from '@/assets/js/event-bus.js';
     import { mapGetters , mapActions } from 'vuex';
 
     export default {
@@ -29,7 +29,7 @@
             console.dir(this.sItem);
 
             // Header 갱신
-            EventBus.$emit('currentTab' , '상품상세');
+            this.$eventBus.$emit('currentTab' , '상품상세');
         },
         methods:{
             saveCart(){

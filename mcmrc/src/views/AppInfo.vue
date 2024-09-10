@@ -5,7 +5,7 @@
     </div>
 </template>
 <script>
-import EventBus from '@/assets/js/event-bus.js';
+// import EventBus from '@/assets/js/event-bus.js';
 export default {
     name: 'AppInfo',
 
@@ -20,7 +20,7 @@ export default {
         this.version = process.env.VUE_APP_VERSION;
 
         // Header 갱신
-        EventBus.$emit('currentTab' , '앱정보');
+        this.$eventBus.$emit('currentTab' , '앱정보');
     }
 
 }

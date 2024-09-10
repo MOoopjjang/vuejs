@@ -14,11 +14,10 @@
 <script>
     import ProductItemComponent from './ProductItemComponent.vue'
     import { mapActions , mapState } from 'vuex';
-    import EventBus from '@/assets/js/event-bus.js';
 
     export default {
         created(){
-            EventBus.$emit('currentTab' , '상품목록');
+            this.$eventBus.$emit('currentTab' , '상품목록');
         },
         methods:{
             goItemDetail(item){
@@ -50,6 +49,7 @@
 
 .content-list {
     width: 100%;
+    padding-left:0px;
 }
 
 li div:nth-child(1){

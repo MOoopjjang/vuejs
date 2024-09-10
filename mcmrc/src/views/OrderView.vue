@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-    import EventBus from '@/assets/js/event-bus.js';
+    // import EventBus from '@/assets/js/event-bus.js';
     import { mapGetters } from 'vuex';
     import OrderItemComp from '../components/OrderItemComponent.vue';
     export default {
@@ -35,7 +35,7 @@
             }
 
             // Header 갱신
-            EventBus.$emit('currentTab' , '주문목록');
+            this.$eventBus.$emit('currentTab' , '주문목록');
         },
         components:{
             'order-item-comp':OrderItemComp
