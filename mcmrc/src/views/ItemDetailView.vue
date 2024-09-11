@@ -12,7 +12,6 @@
     </div>
 </template>
 <script>
-    // import EventBus from '@/assets/js/event-bus.js';
     import { mapGetters , mapActions } from 'vuex';
 
     export default {
@@ -22,7 +21,7 @@
             }
         },
         computed:{
-            ...mapGetters(['getSelectItem'])
+            ...mapGetters(['getSelectItem' , 'isAuthentication'])
         },
         created(){
             this.sItem = this.getSelectItem;
@@ -33,11 +32,18 @@
         },
         methods:{
             saveCart(){
-                alert(this.sItem.itemName+" 가 장바구니에 등록되었습니다.");
-                this.addCartItem(this.sItem);
+                if(!this.isAuthentication){
+                    alert('로그인이 필요합니다.');
+                    this.$router.push({name:'signin'});
+                }else{
+                    alert(this.sItem.itemName+" 가 장바구니에 등록되었습니다.");
+                    this.addCartItem(this.sItem);
 
-                // cart로 이동..
-                this.$router.push({name:'cart'});
+                    // cart로 이동..
+                    this.$router.push({name:'cart'})
+                            .catch(()=>{});
+                }
+               
             },
             ...mapActions(['addCartItem'])
         },

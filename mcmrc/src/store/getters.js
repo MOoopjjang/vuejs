@@ -20,9 +20,14 @@ export function getOrderItems( state ){
     return state.orderItems;
 }
 
+export function isAuthentication( state ){
+    return state.accessToken !== null && state.accessToken.trim().length > 0;
+}
+
 
 export default {
     getSelectItem,
     getCartItems,
-    getOrderItems
+    getOrderItems,
+    isAuthentication
 }

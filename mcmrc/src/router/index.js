@@ -10,8 +10,21 @@ import CartView from '../views/CartView.vue'
 import OrderView from '../views/OrderView.vue';
 import AppInfo from '../views/AppInfo.vue';
 
+import store from '../store';
 
-Vue.use(VueRouter)
+
+Vue.use(VueRouter);
+
+
+const requiredAuth = ()=>(to , from , next)=>{
+  const { isAuthentication } = store.getters;
+  if( !isAuthentication ){
+    alert('로그인이 필요합니다.');
+    next({name:'signin'});
+    return false;
+  }
+  next();
+}
 
 const routes = [
   {
@@ -53,6 +66,8 @@ const routes = [
       top:TopComponent,
       default:CartView
     },
+    beforeEnter: requiredAuth()
+    
     // props: true
   },
   {
@@ -62,6 +77,7 @@ const routes = [
       top:TopComponent,
       default:OrderView
     },
+    beforeEnter: requiredAuth()
     // props: true
   },
   {

@@ -20,14 +20,26 @@ Vue.$cookies.config('1d');
 Vue.config.productionTip = false;
 
 // refresh 할경우 cookie에 있는 token정보를 다시 store에 set
-let token = Vue.$cookies.get(ACCESS_TOKEN);
-if(token){
-  store.dispatch('setAccessToken' , token);
+
+function init(){
+  let token = Vue.$cookies.get(ACCESS_TOKEN);
+  if(token){
+    return store.dispatch('setAccessToken' , token);
+  }else{
+    return Promise.resolve();
+  }
 }
 
-new Vue({
-  router,
-  // vuetify,
-  render: h => h(App),
-  store
-}).$mount('#app');
+init().then(res=>{
+  console.dir(res);
+  
+  new Vue({
+    router,
+    // vuetify,
+    render: h => h(App),
+    store
+  }).$mount('#app');
+})
+
+
+
