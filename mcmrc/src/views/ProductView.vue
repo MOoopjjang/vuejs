@@ -1,7 +1,7 @@
 <template>
-    <div class="content-main">
+    <div class="product-main">
         <div>
-            <ul class="content-list">
+            <ul class="product-list">
                 <product-item-component v-for="productItem in productItems" v-bind:key="productItem.itemCd" 
                     v-on:detail="goItemDetail(productItem)"
                     v-bind:productItem="productItem" 
@@ -12,8 +12,8 @@
     </div>
 </template>
 <script>
-    import ProductItemComponent from './ProductItemComponent.vue'
-    import { mapActions , mapState } from 'vuex';
+ import ProductItemComponent from '../components/ProductItemComponent.vue'
+ import { mapActions , mapState } from 'vuex';
 
     export default {
         created(){
@@ -42,12 +42,12 @@
     }
 </script>
 <style scoped>
-.content-main{
+.product-main{
     width: 100%;
     height: 400px;
 }
 
-.content-list {
+.product-list {
     width: 100%;
     padding-left:0px;
 }
@@ -61,5 +61,4 @@ li div:nth-child(2){
 li div:nth-child(3){
     flex-grow: 1;
 }
-
 </style>

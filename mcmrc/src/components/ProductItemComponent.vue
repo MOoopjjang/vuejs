@@ -1,8 +1,9 @@
 <template>
     <!-- <div> -->
         <li class="product-item" v-on:click="goDetail">
-            <strong>{{ productItem.itemName }}</strong>
-            <span>ID : {{ productItem.id }}</span>
+            <strong>{{ productItem.itemName }}</strong> <br />
+            <span>ID : {{ productItem.id }}</span> <br />
+            <img v-lazy="productItem.img" /> <br />
             <span>CD : {{ productItem.itemCd }}</span>
             <span>가격 : {{ productItem.price }}</span>
         </li>
@@ -33,5 +34,10 @@
         border-bottom: 2px groove; 
         /* box-shadow: inset; */
         padding-left: 10px;
+    }
+
+    .product-item img {
+        width: 100%;
+        height: 100%;
     }
 </style>

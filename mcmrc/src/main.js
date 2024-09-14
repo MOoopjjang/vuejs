@@ -5,12 +5,18 @@ import axios from 'axios';
 import bootstrapVue from 'bootstrap-vue';
 import store from './store';
 import vueCookies from 'vue-cookies';
+import vueLazyload from 'vue-lazyload';
 
 import { ACCESS_TOKEN } from './assets/js/defines.js'
 
 
 Vue.use(vueCookies);
 Vue.use(bootstrapVue);
+Vue.use(vueLazyload , {
+  preLoad: 1,
+  attempt: 1
+});
+
 // Vue.use('Vuex');
 Vue.prototype.$axios = axios;
 Vue.prototype.$eventBus = new Vue();

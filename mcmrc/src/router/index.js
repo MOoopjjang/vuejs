@@ -2,9 +2,9 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomeComponent from '../components/HomeComponent.vue';
 import SignInComponent from '../components/SignInComponent.vue';
-import ContentComponent from '../components/ContentComponent.vue';
 import TopComponent from '../components/TopComponent.vue';
 
+import ProductView from '../views/ProductView.vue';
 import ItemDetailView from '../views/ItemDetailView.vue'
 import CartView from '../views/CartView.vue'
 import OrderView from '../views/OrderView.vue';
@@ -33,11 +33,11 @@ const routes = [
     component: HomeComponent
   },
   {
-    path: '/content',
-    name: 'content',
+    path: '/product',
+    name: 'product',
     components: {
       top:TopComponent,
-      default:ContentComponent
+      default:ProductView
     },
     // props: {
     //   currentTab:'상품목록'
